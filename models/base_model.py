@@ -1,57 +1,42 @@
 #!/usr/bin/python3
-"""BaseModel for airbnb console project"""
+""" module of BaseModel """
+
 import uuid
 from datetime import datetime
-import models
-
-time = "%Y-%m-%dT%H:%M:%S.%f"
 
 
-class BaseModel():
-    """Base class for all classes"""
+class BaseModel:
+    """ Type class of BaseModel """
 
     def __init__(self, *args, **kwargs):
-        """Constructor for basemodel"""
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == '__class__':
-                    continue
-
-                if key in ['created_at', 'updated_at']:
-                    setattr(self, key, self.string2time(value))
-                    continue
-
-                setattr(self, key, value)
-
+        """ Type method initialize """
+        timeformat = "%Y-%m-%dT%H:%M:%S.%f"
+        if len(kwargs) != 0:
+            for key, val in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.strptime(val, timeformat))
+                elif key != '__class__':
+                    setattr(self, key, val)
         else:
-            uuid_gen = uuid.uuid4()
-            self.id = str(uuid_gen)
-            now = datetime.now()
-            self.created_at = now
-            self.updated_at = now
-
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
             models.storage.new(self)
 
-    @staticmethod
-    def string2time(date_string):
-        """Converts string to time"""
-        return datetime.strptime(date_string, time)
-
     def __str__(self):
-        """Returns string representation of an instance"""
-        return("[{}] ({}) {}"
-               .format(self.__class__.__name__, self.id, self.__dict__))
+        """ Type method __str__ """
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def save(self):
-        """Save an instance and set the updated time"""
-        self.updated_at = datetime.now()
+        """ Type method save """
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
-        """Returns the attributes of the instance as a dict"""
-        var = self.__dict__.copy()
-
-        var['__class__'] = self.__class__.__name__
-        var['created_at'] = self.created_at.isoformat()
-        var['updated_at'] = self.updated_at.isoformat()
-        return var
+        """ Type method to_dict """
+        rt_dict = self.__dict__.copy()
+        rt_dict["created_at"] = self.created_at.isoformat()
+        rt_dict["updated_at"] = self.updated_at.isoformat()
+        rt_dict["__class__"] = self.__class__.__name__
+        return rt_dict
