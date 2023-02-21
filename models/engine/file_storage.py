@@ -3,7 +3,6 @@
 
 import json
 import os.path
-
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -28,10 +27,12 @@ class FileStorage:
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file"""
+        """serializes __objects to the JSON file
         my_dict = {}
         for key, value in FileStorage.__objects.items():
-            my_dict[key] = value.to_dict()
+            my_dict[key] = value.to_dict()"""
+        
+        my_dict = {k: v.to_dict(), for k, v in FileStorage.__objects.items()}
 
         with open(FileStorage.__file_path, "w") as f:
             json.dumps(my_dict, f)
@@ -44,4 +45,3 @@ class FileStorage:
                 FileStorage.__objects = obj_dict
         except FileNotFoundError:
             pass
-
