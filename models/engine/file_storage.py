@@ -37,6 +37,10 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+        di_ctio = {'BaseModel': BaseModel}
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path) as f:
                 obj_dict = json.load(f)
+                   for key, value in obj_dict.items():
+                    self.new(di_ctio[value['__class__']](**value))
+            return
