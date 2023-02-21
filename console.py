@@ -7,11 +7,11 @@ class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand CLI, entry command interpreter """
     prompt = '(hbnb) '
 
-    def quit(self, line):
+    def do_quit(self, line):
         """Quit command to exit the program"""
         return True
 
-    def EOF(self, line):
+    def do_EOF(self, line):
         """EOF command to exit the program"""
         print()
         return True
