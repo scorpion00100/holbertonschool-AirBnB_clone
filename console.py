@@ -21,7 +21,9 @@ class HBNBCommand(cmd.Cmd):
         """Handle empty line when is passed as an argument"""
         pass
 
-    def create(self, args):
+    __classes = {'BaseModel'}
+
+    def do_create(self, args):
         """ceate an instance of Basemodel"""
         if not args:
             print("** class name missing **")
@@ -29,12 +31,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             cmd_dm = {'BaseModel': BaseModel}
-            my_obj = cmd_dm[agrs]()
+            my_obj = cmd_dm[args]()
             my_obj.save()
             print("{}".format(my_obj.id))
             storage.save()
 
-    def show(self, line):
+    def do_show(self, line):
         """printstring representation"""
         arg = line.split()
         object_dict = storage.all()
@@ -49,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(object_dict["{}.{}".format(arg[0], arg[1])])
 
-    def destroy(self, line):
+    def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
         arg = line.split()
         object_dict = storage.all()
@@ -67,9 +69,25 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def all(self, line):
-        """prints all strinf representation of all instances"""
+    def do_all(self, line):
+        """prints all string representation of all instances"""
+        stat = 0
+        all_obj = [str(v) for v in storage.all().values()]
+        if not args:
+            stat = 1
+            print('{}'.format(all_obj))
+        elif args:
+            arg_list = args.split()
+        elif args and arg_list[0] in HBNBCommand.__classes:
+            stat = 1
+            all_obj = storage.all()
+            name = arg_list[0]
+            all_obj = [str(v) for k, v in all_obj.items()
+                       if name == v.__class__.__name__]
+            print(all_obj)
 
+        if stat == 0:
+            print("** class doesn't exist **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
