@@ -89,5 +89,25 @@ class HBNBCommand(cmd.Cmd):
         if stat == 0:
             print("** class doesn't exist **")
 
+    def do_update(self, line):
+        """update an instance based on the class name and id"""
+        arg = line.split()
+        object_dict = storage.all()
+        if len(arg) == 0:
+            print("** class name missing **")
+        elif arg[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif len(arg) < 2:
+            print("** instance id missing **")
+        elif ('{}.{}'.format(arg[0], arg[1])) not in object_dict:
+            print("** no instance found **")
+        elif len(arg) < 3:
+            print("** attribute name missing **")
+        elif len(arg) < 4:
+            print("** value missing **")
+        else:
+            obj = "{}.{}".format(arg[0], arg[1])
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
