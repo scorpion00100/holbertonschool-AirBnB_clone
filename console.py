@@ -2,6 +2,14 @@
 """ Console to manage hbnb data """
 
 import cmd
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,7 +29,8 @@ class HBNBCommand(cmd.Cmd):
         """Handle empty line when is passed as an argument"""
         pass
 
-    __classes = {'BaseModel'}
+    __classes = {'BaseModel', 'User', 'State', 'City',
+                'Amenity', 'Place', 'Review'}
 
     def do_create(self, args):
         """ceate an instance of Basemodel"""
