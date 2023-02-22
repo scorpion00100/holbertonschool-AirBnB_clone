@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models import storage
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -39,7 +40,13 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            cmd_dm = {'BaseModel': BaseModel}
+            cmd_dm = {'BaseModel': BaseModel, 
+                     'Place': Place,
+                     'State': State,
+                     'City': City,
+                     'Amenity': Amenity,
+                     'Review': Review, 'User': User,}
+
             my_obj = cmd_dm[args]()
             my_obj.save()
             print("{}".format(my_obj.id))
@@ -82,11 +89,11 @@ class HBNBCommand(cmd.Cmd):
         """prints all string representation of all instances"""
         stat = 0
         all_obj = [str(v) for v in storage.all().values()]
-        if not args:
+        if not line:
             stat = 1
             print('{}'.format(all_obj))
-        elif args:
-            arg_list = args.split()
+        elif line:
+            arg_list = line.split()
         elif args and arg_list[0] in HBNBCommand.__classes:
             stat = 1
             all_obj = storage.all()
@@ -100,22 +107,27 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """update an instance based on the class name and id"""
-        arg = line.split()
+        args = line.split()
+        no_change = ["id", "created_at", "updated_at"]
         object_dict = storage.all()
-        if len(arg) == 0:
+        if not line:
             print("** class name missing **")
-        elif arg[0] not in HBNBCommand.__classes:
+        elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
-        elif len(arg) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
-        elif ('{}.{}'.format(arg[0], arg[1])) not in object_dict:
-            print("** no instance found **")
-        elif len(arg) < 3:
-            print("** attribute name missing **")
-        elif len(arg) < 4:
-            print("** value missing **")
         else:
-            obj = "{}.{}".format(arg[0], arg[1])
+            class_id = "{}.{}".format(args[0], args[1])
+            if class_id not in storage.all():
+                print("** no instance found **")
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
+                print("** value missing **")
+            elif args[2] not in no_change:
+                new_obj = object_dict[class_id]
+                new_obj.__dict__[args[2]] = args[3]
+                new_obj.save()
 
 
 if __name__ == '__main__':
