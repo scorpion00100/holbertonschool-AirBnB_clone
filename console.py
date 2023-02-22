@@ -85,24 +85,24 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_all(self, line):
+    def do_all(self, args):
         """prints all string representation of all instances"""
-        stat = 0
+        begin = 0
         all_obj = [str(v) for v in storage.all().values()]
-        if not line:
-            stat = 1
+        if not args:
+            begin = 1
             print('{}'.format(all_obj))
-        elif line:
-            arg_list = line.split()
-        elif args and arg_list[0] in HBNBCommand.__classes:
-            stat = 1
-            all_obj = storage.all()
+        elif args:
+            arg_list = args.split()
+        if args and arg_list[0] in HBNBCommand.__classes:
+            begin = 1
+            all_obj = storage.all()  # all() method from file_storage.py
             name = arg_list[0]
             all_obj = [str(v) for k, v in all_obj.items()
                        if name == v.__class__.__name__]
             print(all_obj)
 
-        if stat == 0:
+        if begin == 0:
             print("** class doesn't exist **")
 
     def do_update(self, line):
