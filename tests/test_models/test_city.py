@@ -12,7 +12,7 @@ import unittest
 
 class Testcity(unittest.TestCase):
     """tests for the City class"""
-    def test_pep8_conformance_city(self):
+    def test_pep8_conform_city(self):
         """Test if we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/city.py'])
