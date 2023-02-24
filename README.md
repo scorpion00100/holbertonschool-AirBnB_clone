@@ -96,6 +96,50 @@ All tests should also pass in non-interactive mode: $ echo "python3 -m unittest 
 | `quit` | Exit the program. |
 | `EOF` | Exit the program. |
 
+## Examples
+
+#### run the console
+
+To run the console :
+```bash
+  AirBnB_clone$ ./console.py
+  (hbnb) 
+```
+#### create
+
+To create a new instance of BaseModel
+```bash
+  (hbnb) create BaseModel
+```
+
+#### show
+
+To print the string representation of an instance based on the class name and id
+```bash
+  (hbnb) show BaseModel 1234-1234-1234
+```
+
+#### destroy
+
+To delete an instance based on the class name and id
+```bash
+  (hbnb) destroy BaseModel 1234-1234-1234
+```
+
+#### all
+
+To print all string representation of all instances based or not on the class name
+```bash
+  (hbnb) all or all State
+```
+
+#### update
+
+Updates an instance based on the class name and id by adding or updating attribute
+```bash
+  update BaseModel 1234-1234-1234 first_name "Betty"
+```
+
 ## Supported classes :
 
 - **BaseModel** : parent class
