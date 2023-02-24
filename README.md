@@ -137,7 +137,7 @@ To print all string representation of all instances based or not on the class na
 
 Updates an instance based on the class name and id by adding or updating attribute
 ```bash
-  update BaseModel 1234-1234-1234 first_name "Betty"
+  (hbnb) update BaseModel 1234-1234-1234 first_name "Betty"
 ```
 
 ## Supported classes :
