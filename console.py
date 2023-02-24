@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     __classes = {'BaseModel', 'User', 'State', 'City',
-                'Amenity', 'Place', 'Review'}
+                 'Amenity', 'Place', 'Review'}
 
     def do_create(self, args):
         """ceate an instance of Basemodel"""
@@ -40,12 +40,13 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            cmd_dm = {'BaseModel': BaseModel, 
-                     'Place': Place,
-                     'State': State,
-                     'City': City,
-                     'Amenity': Amenity,
-                     'Review': Review, 'User': User,}
+            cmd_dm = {'BaseModel': BaseModel,
+                      'Place': Place,
+                      'State': State,
+                      'City': City,
+                      'Amenity': Amenity,
+                      'Review': Review,
+                      'User': User}
 
             my_obj = cmd_dm[args]()
             my_obj.save()
