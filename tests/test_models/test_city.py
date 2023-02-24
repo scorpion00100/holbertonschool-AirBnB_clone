@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Test City"""
-
+"""Test for city module"""
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -12,20 +11,20 @@ import unittest
 
 
 class Testcity(unittest.TestCase):
-    """Unittest for the class City"""
-
-    def test_pep8_state(self):
-        """Tests that there is no PEP8 error"""
+    """tests for the City class"""
+    def test_pep8_conformance_city(self):
+        """Test if we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/city.py'])
-        self.assertEqual(result.total_errors, "Found code style errors (and warnings).")
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
     def test_class(self):
-        """Tests if the name of the class is correct"""
+        """test if class is named correctly"""
         city1 = City()
         self.assertEqual(city1.__class__.__name__, "City")
 
-    def test_mother(self):
-        """Tests if City inherits from BaseModel"""
+    def test_father(self):
+        """test if Class inherits from BaseModel"""
         city1 = City()
-        self.assertEqual(city1.__class__.__name__, "City")
+        self.assertTrue(issubclass(city1.__class__, BaseModel))
