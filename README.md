@@ -2,6 +2,9 @@
 
 ![enter image description here](https://i.imgur.com/44u0pXG.png)
 
+
+## Description
+
 The goal of the project was to deploy a recreation of the AirBnB website. 
 
 The first step of this project is to write a command interpreter to manage our AirBnB objects. This first step is very important because we will use what we build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration…
