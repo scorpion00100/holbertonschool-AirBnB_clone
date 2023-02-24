@@ -14,7 +14,15 @@ In our case, we want to be able to manage the objects of our project:
 - Destroy an object
 
 
-## Objectives
+## Learning Objectives
+
+- Serialization / Deserialization flow (object <-> Dict <-> Json <-> file)
+- Packages / Modules / Cyclical imports / How to import / Prevent execution /Etc.
+- Layered architecture
+- Interfaces (storage)
+- Abstract Classes (BaseClass)
+
+### General
 
 - How to create a Python package
 - How to create a command interpreter in Python using the cmd module
