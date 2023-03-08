@@ -52,7 +52,7 @@
     margin: 0 0 2px 20px;
 }
 
-/* don't show bullets in lists */
+
 .filters ul {
     list-style-type: none;
 }
@@ -60,13 +60,13 @@
 .locations .popover,
 .amenities .popover {
     background-color: #FAFAFA;
-    display: none; /* text not displayed by default */
+    display: none;
     position: absolute;
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     margin: 0;
-    top: 100%; /* show text block right below States and Amenity */
+    top: 100%;
 }
 
 .popover h2 {
@@ -74,7 +74,7 @@
 }
 
 .popover li {
-    margin-top: 5px; /* space between lines */
+    margin-top: 5px;
 }
 
 .locations:hover .popover,
